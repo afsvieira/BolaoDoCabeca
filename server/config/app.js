@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 //setup express session
 app.use(session({
-  secret: "SomeSecret",
+  secret: process.env.MY_SECRET,
   saveUninitialized: false,
   resave: false
 }));

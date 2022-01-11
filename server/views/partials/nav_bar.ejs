@@ -1,0 +1,101 @@
+  <!-- Main Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" id="logo">BdC</a>
+      <% if(username != '') { %>
+      <a class='navbar-brand' href='/users/profile/<%= _id %>' id='userLogin'><i class="far fa-user"></i> <%= username %></a>
+      <% } %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <ul class="navbar-nav ms-auto">          
+          <% if(administrador == 'Sim') { %> 
+          <li class="nav-item dropdown">            
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">            
+            <i class="fas fa-users"></i> Admin</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/admin">Listar usuários</a></li>
+            <li><a class="dropdown-item" href="/admin/newuser">Adicionar usuário</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/admin/registerbolao">Cadastrar Novo Bolão</a></li>             
+                   
+            <li><a class="dropdown-item" href="/admin/preaddjogo">Cadastrar Novo Jogo</a></li>
+            <li><a class="dropdown-item" href="/admin/addresultado">Atualizar Jogo</a></li>
+            <li><a class="dropdown-item" href="/admin/addresultadoextra">Atualizar Apostas Extras</a></li>            
+            </ul>
+          </li>
+          <% } %>
+          <% if(typeof username == 'string' && username) { %> 
+          <li class="nav-item">            
+              <% if(title == "Palpitar") { %>
+              <a class="nav-link active">
+              <% } else { %>
+              <a class="nav-link" aria-current="page" href="/jogos/palpitar">            
+            <% } %><i class="fas fa-plus"></i></i> Palpitar</a>            
+          </li>
+          <% } %> 
+          
+
+          <% if(typeof username == 'string' && username) {%>
+          <li class="nav-item">
+            <% if(title == "Palpites") { %>
+              <a class="nav-link active">
+            <% } else { %>
+              <a class="nav-link" aria-current="page" href="/jogos/palpites">
+            <% } %><i class="fas fa-futbol"></i> Palpites </a>
+          </li>
+          <% } %>
+
+          <% if(typeof username == 'string' && username) {%>
+          <li class="nav-item">            
+            <% if(title == "Ranking") { %>
+              <a class="nav-link active">
+            <% } else { %>
+              <a class="nav-link" aria-current="page" href="/jogos/rankings">
+            <% } %><i class="fas fa-bars"></i> Ranking </a>
+          </li>
+          <% } %>
+
+          <li class="nav-item">
+            <% if(title == "Regras") { %>
+              <a class="nav-link active">
+            <% } else { %>
+              <a class="nav-link" aria-current="page" href="/regras">
+            <% } %>
+              <i class="fas fa-pencil-ruler"></i> Regras </a>
+          </li>          
+          
+          <li class="nav-item">
+            <% if(title == "Contato") { %>
+              <a class="nav-link active">
+            <% } else { %>
+              <a class="nav-link" aria-current="page" href="/contato">
+            <% } %><i class="fas fa-envelope"></i> Contato </a>
+          </li>
+          <% if(typeof username == 'string' && username == '') {%>
+          <li class="nav-item">
+            <% if(title == "Login") { %>
+              <a class="nav-link active">
+            <% } else { %>
+              <a class="nav-link" aria-current="page" href="/login">
+            <% } %><i class="fas fa-sign-in-alt"></i> Login </a>
+          </li>
+          <% } %>
+
+          <% if(typeof username == 'string' && username) {%>
+          <li class="nav-item">
+            <% if(title == "Logout") { %>
+              <a class="nav-link active">
+            <% } else { %>
+              <a class="nav-link" aria-current="page" href="/logout">
+            <% } %><i class="fas fa-sign-out-alt"></i> Logout </a>
+          </li>
+          <% } %> 
+
+          
+          
+    </div>
+  </nav>

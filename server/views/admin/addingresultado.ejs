@@ -1,0 +1,84 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+ <main class="container column-layout">
+      <h1>JOGOS</h1>
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope='col'>Data</th>
+              <th scope="col">Bolão</th>
+              <th scope="col">Time Mandante</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">x</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">Time Visitante </th>
+              <th scope="col">Editar</th>
+              </tr>
+          </thead>
+          <tbody>              
+              
+            <% bolao.forEach(item => { %>
+            <% item.jogos.forEach(jogo => { %>             
+              <% var dataJogo = new Date(jogo.date); %>
+              <!-- Jogo a editar -->
+              <% if (jogo._id == jogoID) { %>
+              <tr>                
+                <form class="form" method="POST">                               
+                <td style='text-align:center;vertical-align:middle'><%= dataJogo.toDateString() %></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td> 
+                <td style='text-align:center;vertical-align:middle'><%= jogo.time1 %></td>
+                <td style='text-align:center;vertical-align:middle'> <% item.times.forEach(img => { %> <% if(jogo.time1 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td style='text-align:center;vertical-align:middle'><input type="number" class="form-control" id="resultado_time1TextField" name="resultado_time1"' min='0' style="width: 50px;" value='0'></td>
+                <td style='text-align:center;vertical-align:middle'>x</td>
+                <td style='text-align:center;vertical-align:middle'><input type="number" class="form-control" id="resultado_time2TextField" name="resultado_time2"' min='0' style="width: 50px;" value='0'></td>
+                <td style='text-align:center;vertical-align:middle'><% item.times.forEach(img => { %> <% if(jogo.time2 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td style='text-align:center;vertical-align:middle'> <%= jogo.time2 %></td>                
+                <td style='text-align:center;vertical-align:middle'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="far fa-save"></i> Salvar</button>&nbsp; <a href="/" class="btn btn-warning" style="margin: 0 15px;">
+                      <i class="fas fa-undo"></i> Cancelar</a></td>                
+            </tr>
+            
+            <% } else { %>
+
+              <tr>                
+                <form class="form" method="POST">                               
+                <td style='text-align:center;vertical-align:middle'><%= dataJogo.toDateString() %></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td> 
+                <td style='text-align:center;vertical-align:middle'><%= jogo.time1 %></td>
+                <td style='text-align:center;vertical-align:middle'> <% item.times.forEach(img => { %> <% if(jogo.time1 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td style='text-align:center;vertical-align:middle'><%= jogo.resultado_time1 %></td>
+                <td style='text-align:center;vertical-align:middle'>x</td>
+                <td style='text-align:center;vertical-align:middle'><%= jogo.resultado_time2 %></td>
+                <td style='text-align:center;vertical-align:middle'><% item.times.forEach(img => { %> <% if(jogo.time2 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td style='text-align:center;vertical-align:middle'> <%= jogo.time2 %></td>                
+                <td style='text-align:center;vertical-align:middle'><a href='/admin/jogo/addresultado/<%= item._id %>/<%= jogo._id %>'><i class="fas fa-plus-circle"></i></a></td>                
+            </tr>
+            <% } %>
+            <% }); %>
+            <% }); %>
+
+
+          </tbody>
+      </table>     
+    </main>
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

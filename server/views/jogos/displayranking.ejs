@@ -1,0 +1,67 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+<% let i = 1; %>
+<% let rank = []; %>
+<div class="box">
+    <p><h1>RANKINGS</h1></p>
+</div>   
+
+<div class="box">
+    
+        <h2>
+        <% boloesList.forEach(bolao => { %>
+        
+        <a href='/jogos/ranking/<%= bolao._id %>'><button class="btn btn-primary" style="margin: 0 15px;"><i class="fas fa-trophy"></i> <%= bolao.bolao %> </button></a>
+        
+        <% }); %>
+        </h2>
+           
+   
+</div>
+
+<div class='box'>
+    <p></p>
+    <h3><%= bolao.bolao %></h3>
+</div>
+    <div class='box'>
+    <table id='table' class="table table-hover">
+        <thead>
+            <tr>              
+            <th scope="col"> </th>
+            <th scope="col">Nome</th>
+            <th scope="col">Apelido</th>              
+            <th scope="col">Pontos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% inscritos.forEach(inscrito => { %>
+                <% let sumPontos = 0; %>
+                <% pontuacao.forEach(pontos => { %>                  
+                    <% if(inscrito._id == pontos.user) { %>
+                        <% sumPontos += pontos.pontos %>
+                    <% } %>
+                <% }); %>
+                    <% let inscritoPontos = {'name': inscrito.name, 'pontuacao': sumPontos, 'apelido': inscrito.apelido, 'id': inscrito._id}; %>
+                    <% rank.push(inscritoPontos) %>                
+            <% });%>
+            <% let sortedRank = rank.sort(function(a,b){return b.pontuacao - a.pontuacao}); %>
+            <% sortedRank.forEach(user => { %>
+                <tr>
+                    <td><%= i %></td>                        
+                    <td><a href="/users/profile/<%= user.id %>"><%= user.name %></a></td>
+                    <td><a href="/users/profile/<%= user.id %>"><%= user.apelido %></a></td>
+                    <td><%= user.pontuacao %></td>                    
+                </tr>
+                <% i++; %>
+            <% }); %>               
+            
+        </tbody>
+    </table>
+
+
+</div>
+
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

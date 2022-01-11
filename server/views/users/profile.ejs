@@ -1,0 +1,66 @@
+<%- include ../partials/header.ejs %>
+
+<%- include ../partials/nav_bar.ejs %>
+<div>
+  <header class="blog-header py-3 bg-dark">     
+      <div class="container">
+        <% if(username == profileUser.username) { %>
+            <a href='/users/profile/edit/<%= profileUser._id %>'><button class="btn" /><i class="fas fa-user-edit"></i> Editar Profile</button></a>
+        <% } else {} %>
+      </div>
+    </div>
+  </header>
+<main class="container">
+  <div class="p-5 mb-auto bg-light rounded-3">
+    <div class="container-fluid py-5">                   
+        <p><% if(!profileUser.img) { %>
+        <span style='font-size: 96px;' class="rounded-circle"><i class="fas fa-user-alt"></i></span>
+        <% } else { %>
+        <img src='<%= profileUser.img %>' class="rounded-circle" alt="" style="object-fit:cover;
+            width:200px;
+            height:200px;
+            border: solid 1px #CCC"/> 
+        <% } %> </p>
+                                    
+    </div>
+
+    <div class="col-md-12 px-5 h-100">    
+      <p><h1 class="display-5 fw-bold"><%= profileUser.name.toUpperCase() %></h1></p>
+      <p class="col-md-8 fs-5"><b>E-mail (username):</b> <%= profileUser.username %></p>
+      <p class="col-md-8 fs-5"><b>Apelido:</b> <%= profileUser.apelido %></p>          
+    </div>
+  </div>
+    <div class="p-auto mb-auto bg-dark rounded-3">
+    <div class="h-100 p-5 text-white bg-dark row g-3">
+        <p><b><h5> Time do coração: </b></p><p><%= profileUser.time %>
+        <% if (!profileUser.time) { %> 
+        <a href='/users/profile/edit/<%= profileUser._id %>'>Adicione seu time!</a>
+        <% } else { %>
+        <% if (profileUser.time.toLowerCase() == 'vitoria' || profileUser.time.toLowerCase() == 'vitória') { %>
+        <img src='https://logodetimes.com/times/vitoria/logo-vitoria-1024.png' class="rounded-circle" alt="" style="object-fit:cover;
+            width:100px;
+            height:100px;
+            border: none"/>
+        <% } %>
+        <% if (profileUser.time.toLowerCase() == 'bahia' || profileUser.time.toLowerCase() == 'baêa') { %>
+        <img src='https://logodetimes.com/times/bahia/logo-bahia-512.png' class="rounded-circle" alt="" style="object-fit:cover;
+            width:100px;
+            height:100px;
+            border: none"/>
+        <% } %>
+        <% } %>
+        </h5></p>
+        <hr> 
+        <p><b><h5> Sobre mim: </b></p><p><%= profileUser.bio %> </h5></p>
+        
+      
+    </div>
+</main>
+
+
+
+
+
+
+<%- include ../partials/bottom_nav.ejs %>
+<%- include ../partials/footer.ejs %>

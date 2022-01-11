@@ -1,0 +1,96 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<main class="container column-layout">
+<h1><%= title %></h1>
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+        <br>
+            
+
+            <form class="form" method="POST">
+                <p><div class="form-group">
+                    <label for="nameTextField"><b>Nome:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="nameTextField"
+                    placeholder="Nome"
+                    name="name" value='<%= userToEdit.name %>' required>
+                </div></p>
+                <p>
+                <div class="form-group">
+                    <label for="authorTextField"><b>Apelido:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="authorTextField" placeholder='Apelido'                    
+                    name="apelido" value='<%= userToEdit.apelido %>' required>
+                </div>
+                </p>
+
+                <p><div class="form-group">
+                    <label for="publishedTextField"><b>E-mail</b></label><br />
+                    <input type="text" class="form-control"
+                    id="usernameTextField"
+                    placeholder="email@email.com"
+                    name="username" value='<%= userToEdit.username %>' required>
+                </div></p>
+                <div class="form-group" align="left">
+                    <label for='campeonatos'><b>Campeonatos Inscritos:</b></label><br />
+                    <% boloesList.forEach(bolao => { %>                    
+                        
+                        <input type="checkbox" id="<%= bolao.bolao %>" name="bolaoInscrito" value="<%= bolao.bolao %>" 
+                        <% if(userToEdit.inscrito.includes(bolao.bolao)) {%>
+                             checked>                             
+                       <% } else { %>
+                                >
+                        <% } %>
+                           
+                        <label for="<%= bolao.bolao %>"><%= bolao.bolao %></label><br />                        
+                    <% }); %>
+
+               
+                </div>                
+                <p><div class='form-group' align="left">
+                <label for='status'><b>Pagamento:</b></label><br />
+                <% if(userToEdit.status == 'Sim') { %>                
+                <input type='radio' id='sim' value='Sim' name='status' checked>
+                <label for='sim'>Sim</label><br>
+                <input type='radio' id='nao' value='Não' name='status'>
+                <label for='Sim'>Não</label><br></p>
+                <% } else { %>
+                <input type='radio' id='sim' value='Sim' name='status'>
+                <label for='sim'>Sim</label><br>
+                <input type='radio' id='nao' value='Não' name='status' checked>
+                <label for='nao'>Não</label><br></p>
+                <% } %> 
+                
+                <% if(userToEdit.administrador == 'Sim') { %>
+                <p><div class='form-group'>
+                <label for='admin'><b>Administrador:</b></label><br />
+                <input type='radio' id='sim' value='Sim' name='admin' checked>
+                <label for='sim'>Sim</label><br>
+                <input type='radio' id='nao' value='Não' name='admin'>
+                <label for='nao'>Não</label><br></p></div>
+                <% } else { %>
+                <p><div class='form-group'>
+                <label for='admin'><b>Administrador:</b></label><br />
+                <input type='radio' id='sim' value='Sim' name='admin'>
+                <label for='sim'>Sim</label><br>
+                <input type='radio' id='nao' value='Não' name='admin' checked>
+                <label for='Nao'>Não</label><br></p></div>
+                <% } %>                
+
+
+                <p><div style='text-align: center;'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="far fa-save"></i> Salvar</button>
+                
+                    <a href="/admin" class="btn btn-warning" style="margin: 0 15px;">
+                        <i class="fas fa-undo"></i> Cancelar</a></div></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+</main>
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

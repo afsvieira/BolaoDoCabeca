@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+<main class="container column-layout">
+
+
+
+<h1>PALPITES EXTRAS</h1>      
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope="col">Data Limite</th>
+              <th scope='col'>Extra</th>
+              <th scope="col">Resultado</th>                                         
+              <th scope="col">Editar</th>
+              </tr>
+          </thead>
+
+          <tbody>
+              
+                <% bolao.forEach(item => { %>
+                    <% var dataLimite = new Date(item.extrasDate); %>                   
+                 
+                <% item.extras.forEach(extra => { %>
+                    <tr>
+                    <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                    <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td>
+                    <td style='text-align:center;vertical-align:middle'><%= extra.resultado %></td>
+                    <td style='text-align:center;vertical-align:middle'>
+                        <a href='/admin/jogo/extra/editdate/<%= item._id %>/<%= extra._id %>' title='Editar Data Limite'><i class="fas fa-calendar"></i>&nbsp;</a>
+                        <a href='/admin/jogo/extra/addresultado/<%= item._id %>/<%= extra._id %>' title='Editar resultado'><i class="fas fa-edit"></i>&nbsp;</a>
+                        <a href='/admin/jogo/extra/removeresult/<%= item._id %>/<%= extra._id %>' title='Remover resultado'><i class="fas fa-eraser"></i>&nbsp;</a>
+                        <a href='/admin/jogo/extra/delete/<%= item._id %>/<%= extra._id %>' title='Deletar Extra'><i class="fas fa-trash-alt"></i></a></td>
+                    </td>
+                    </tr>                    
+                  <% }); %>
+                <% }); %>
+            </tbody>
+        </table>
+        <button class="btn btn-primary"><a href="/admin/addapostaextra/<%= bolaoID %>"><i class="fas fa-plus-circle"></i> Adicionar aposta extra</button></a>
+</main>
+
+<%- include('../partials/bottom_nav') %>
+<%- include('../partials/footer') %>

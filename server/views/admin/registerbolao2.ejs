@@ -1,0 +1,77 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+        <br>
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <p><div class="form-group">
+                    <label for="bolaoTextField"><b>Nome do Bolão: </b></label><br />
+                    <input type="text" class="form-control"
+                    id="bolaoTextField"
+                    value='<%= bolaoName %>'
+                    name="bolaoName" readonly='readonly'>
+                </div></p>
+                <p><div class='form-group'>
+                    <label for='numTimes'><b>Total de times: </b></label><br />
+                    <input type='number' id='numTimes' class='form-control'
+                    name='numTimes' min='2' max='32' value='<%= numTimes %>' readonly='readonly'>
+                </p></div>
+                <p><div class='form-group'>
+                    <label for='numExtras'><b>Apostas Extras: </b></label><br />
+                    <input type='number' id='numExtras' class='form-control'
+                    name='numExtras' value='<%= numExtras %>' readonly='readonly'>
+                </p></div>
+                <% for(i = 1; i <= numTimes; i++) { %>
+                <p><div class="form-group">
+                    <label for="time<%= i %>TextField"><b>Time <%= i %>: </b></label><br />
+                    <input type="text" class="form-control"
+                    id="time<%= i %>TextField"                    
+                    name="time<%= i %>" required>
+                </div></p>
+                <p><div class="form-group">
+                    <label for="img_time<%= i %>TextField"><b>URL do escudo Time <%= i %>: </b></label><br />
+                    <input type="text" class="form-control"
+                    id="img_time<%= i %>TextField"                    
+                    name="img_time<%= i %>" required>
+                </div></p>
+                <% } %>
+                <% for(i = 1; i <= numExtras; i++) { %>
+                    <p><div class="form-group">
+                        <label for="extra<%= i %>TextField"><b>Aposta Extra <%= i %>: </b></label><br />
+                        <input type="text" class="form-control"
+                        id="extra<%= i %>TextField"                    
+                        name="extra<%= i %>" required>
+                    </div></p>
+                    <p><div class="form-group">
+                        <label for="points<%= i %>TextField"><b>Pontos para aposta extra <%= i %>: </b></label><br />
+                        <input type="number" class="form-control"
+                        id="points<%= i %>"                    
+                        name="points<%= i %>" min='0' required>
+                    </div></p>
+                <% } %>
+                <% if(numExtras > 0) { %>
+                    <p><div class='form-group'>
+                        <label for='extrasDate'><b>Data limite para as apostas extras:</b></label><br />
+                        <input type='date' class='form-control' id='extrasDate' name='extrasDate' required>
+                    </div></p>
+                <% } %>
+                
+
+                <p><div style='text-align: center;'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="fas fa-edit"></i> Criar</button>
+                
+                    <a href="/" class="btn btn-warning" style="margin: 0 15px;">
+                        <i class="fas fa-undo"></i> Cancelar</a></div></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

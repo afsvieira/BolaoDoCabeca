@@ -1,0 +1,94 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+ <main class="container column-layout">
+      <h1>JOGOS EM ABERTO</h1>
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope='col'>Data</th>
+              <th scope="col">Bolão</th>
+              <th scope="col">Time Mandante</th>
+              <th scope="col"> </th>
+              <th scope="col">x</th>
+              <th scope="col"> </th>
+              <th scope="col">Time Visitante </th>
+              <th scope="col">Actions</th>
+              </tr>
+          </thead>
+          <tbody>              
+              
+            <% boloesList.forEach(item => { %>
+              <% item.jogos.forEach(jogo => { %>
+              <% if(jogo.status == 'aberto') { %>
+              <% var dataJogo = new Date(jogo.date); %>           
+              <tr>
+                <td style='text-align:center;vertical-align:middle'><%= dataJogo.toDateString() %></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td> 
+                <td style='text-align:center;vertical-align:middle'><%= jogo.time1 %></td>
+                <td style='text-align:center;vertical-align:middle'></td>
+                <td style='text-align:center;vertical-align:middle'>x</td>
+                <td style='text-align:center;vertical-align:middle'></td>
+                <td style='text-align:center;vertical-align:middle'><%= jogo.time2 %></td>                
+                <td style='text-align:center;vertical-align:middle'><a href='#'><i class="far fa-edit"></i></a>&nbsp;                 
+                </td>                
+            </tr>
+            <% }});}); %>
+           
+        
+          </tbody>
+          
+
+      </table>
+      <hr>
+
+      <h1>JOGOS ENCERRADOS</h1>
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr> 
+              <th scope='col'>Data</th>  
+              <th scope="col">Bolão</th>
+              <th scope="col">Time Mandante</th>
+              <th scope="col"> </th>
+              <th scope="col">x</th>
+              <th scope="col"> </th>
+              <th scope="col">Time Visitante </th>
+              <th scope="col">Pontos</th>
+              </tr>
+          </thead>
+          <tbody>              
+            <% boloesList.forEach(item => { %>
+              <% item.jogos.forEach(jogo => { %>
+              
+              <% var dataJogo = new Date(jogo.date); %>              
+              <% if(jogo.status == 'fechado') { %>           
+              <tr>
+              <td><%= dataJogo.toDateString() %></td>
+                <td><%= item.bolao %></td> 
+                <td><%= jogo.time1 %></td>
+                <td><%= jogo.resultado_time1 %></td>
+                <td>x</td>
+                <td><%= jogo.resultado_time2 %></td>
+                <td><%= jogo.time2 %></td>                
+                <td></td>                
+            </tr>
+            <% }});}); %>
+           
+        
+          </tbody>
+
+      </table>
+      
+      
+
+      <section class="text-content">        
+      </section>
+    </main>
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

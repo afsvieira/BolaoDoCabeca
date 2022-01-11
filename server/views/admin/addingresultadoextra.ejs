@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+ <main class="container column-layout">
+      <h1><%= title %>></h1>
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope='col'>Data Limite</th>
+              <th scope="col">Extra</th>
+              <th scope="col">Resultado</th>
+              <th scope="col">Editar</th>              
+              </tr>
+          </thead>
+          <tbody>              
+              
+            <% bolao.forEach(item => { %>
+            <% item.extras.forEach(extra => { %>
+                <% let dataLimite = new Date(item.extrasDate); %>             
+              
+              <!-- Jogo a editar -->
+              <% if (extra._id == extraID) { %>
+              <tr>                
+                <form class="form" method="POST">                               
+                <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td> 
+                <td style='text-align:center;vertical-align:middle'>
+                    <select type='selected' class='form-control' id='extraAnswer' name='extraAnswer' required>
+                        <option value='null'> </option>
+                        <% item.times.forEach(time => { %>
+                            <option value='<%= time.name %>'><%= time.name %></option>
+                        <% }); %>
+                    </select>                
+                </td>                                
+                <td style='text-align:center;vertical-align:middle'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="far fa-save"></i> Salvar</button>&nbsp; <a href="/admin/addresultadoextra/<%= item._id %>" class="btn btn-warning" style="margin: 0 15px;">
+                      <i class="fas fa-undo"></i> Cancelar</a></td>                
+            </tr>
+            
+            <% } else { %>
+
+                <tr>                
+                    <form class="form" method="POST">                               
+                    <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                    <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td> 
+                    <td style='text-align:center;vertical-align:middle'><%= extra.resultado %></td>                                
+                    <td style='text-align:center;vertical-align:middle'></td>                
+                </tr>
+            <% } %>
+            <% }); %>
+            <% }); %>
+
+
+          </tbody>
+      </table>     
+    </main>
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

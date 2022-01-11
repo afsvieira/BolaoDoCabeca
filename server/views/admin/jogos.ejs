@@ -1,0 +1,52 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+
+    <main class="container column-layout">
+      <h1>LISTA DE JOGOS</h1>
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>
+              <th scope="col">Bolão</th>   
+              <th scope="col">Time 1</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">Time 2</th>
+              <th scope="col">Data</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
+              </tr>
+          </thead>
+          <tbody>              
+            <% boloesList.forEach(element => { %>
+            <% element.jogos.forEach(item => { %>              
+
+            <tr>
+                <td style='text-align:center;vertical-align:middle'><%= element.bolao %></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.time1 %></td>
+                <td style='text-align:center;vertical-align:middle'></td>
+                <td style='text-align:center;vertical-align:middle'>x</td>
+                <td style='text-align:center;vertical-align:middle'></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.time2 %></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.date %></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.status %></td>
+                <td style='text-align:center;vertical-align:middle'><a href='/jogos/edit/<%= item._id %>'><i class="far fa-edit"></i></a>&nbsp;          
+                <a href='/jogos/delete/<%= item._id %>'><i class="far fa-trash-alt"></i></td>                
+            </tr>
+            <% }); %>
+            <% }); %>
+        
+          </tbody>
+
+      </table>
+      
+
+      <section class="text-content">        
+      </section>
+    </main>
+    
+
+    <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+        <br>
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <p><div class="form-group">
+                    <label for="bolaoTextField"><b>Nome do Bolão: </b></label><br />
+                    <input type="text" class="form-control"
+                    id="bolaoTextField"
+                    placeholder="Nome"
+                    name="bolaoName" required>
+                </div></p>
+                <p><div class='form-group'>
+                    <label for='numTimes'><b>Total de times: </b></label><br />
+                    <input type='number' id='numTimes' class='form-control'
+                    name='numTimes' min='2' max='32' required>
+                </p></div>
+                <p><div class='form-group'>
+                    <label for='numExtras'><b>Apostas extras: </b></label><br />
+                    <input type='number' id='numExtras' class='form-control'
+                    name='numExtras' min='0' max='4' required>
+                </p></div>
+
+                <p><div style='text-align: center;'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="fas fa-edit"></i> Avançar</button>
+                
+                    <a href="/" class="btn btn-warning" style="margin: 0 15px;">
+                        <i class="fas fa-undo"></i> Cancelar</a></div></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

@@ -1,0 +1,127 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<% var palpitesAdd = []; %>
+ <% userPalpites.forEach(palpite => { %>   
+   <% palpitesAdd.push(palpite.jogoID); %>   
+ <% }); %>
+ <main class="container column-layout">
+<!-- Palpites Extras -->
+      
+<h1 align='center'>PALPITES EXTRAS</h1>      
+        
+        
+<table id='table' class="table table-hover">
+    <thead>
+        <tr>   
+        <th scope='col'>Data Limite</th>
+        <th scope="col">Bolão</th>
+        <th scope="col">Aposta Extra</th>
+        <th scope="col">Palpite</th>
+        <th scope='col'>Pontos Ganhos</th>              
+        <th scope="col">Editar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% boloesList.forEach(item => { %>
+        <% item.extras.forEach(extra => { %>
+            <% var dataLimite = new Date(item.extrasDate); dataLimite.setHours(1,0,0,0) %>
+            <% var today = new Date(); today.setHours(1,0,0,0) %>                                   
+            <% if(today < dataLimite) { %>
+
+                <!-- Jogo a editar -->
+                <% if(extra._id == extraID) { %>
+
+                    <tr>
+                        <form class="form" method="post">
+                        <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                        <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td>
+                        <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td>
+                        <td style='text-align:center;vertical-align:middle'>
+                            <select type='selected' class='form-control' id='extraAnswer' name='extraAnswer' required>
+                                <option value='null'> </option>
+                                <% item.times.forEach(time => { %>
+                                    <option value='<%= time.name %>'><%= time.name %></option>
+                                <% }); %>
+                            </select>
+                        </td>
+                        <td style='text-align:center;vertical-align:middle'>Aguardando resultado</td>
+                        <td style='text-align:center;vertical-align:middle'><button class='btn btn-primary' type='submit' style="margin: 0 15px;"><i class="fas fa-save"></i> Salvar</button></td>                   
+                        </form>
+                    </tr>
+                
+                <% } else { %>
+
+
+                    <% if(palpitesAdd.includes(extra._id.toString()) == true) { %>
+                        <% userPalpites.forEach(palpites => { %>
+                            <% if(palpites.extraID == extra._id) { %>  
+                                
+                                <tr>
+                                    <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                                    <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td>
+                                    <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td>
+                                    <td style='text-align:center;vertical-align:middle'><%= palpites.extraAnswer %></td>
+                                    <td style='text-align:center;vertical-align:middle'>Aguardando resultado</td>
+                                    <td style='text-align:center;vertical-align:middle'><a href='/jogos/palpitar/extras/edit/<%= item._id %>/<%= extra._id %>/<%= _id %>'><i class="far fa-edit"></i></a>&nbsp;</td>                   
+                                </tr>
+
+                            <% } %>
+                        <% }); %>
+                    
+                    <% } else { %>
+
+                        <tr>
+                            <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                            <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td>
+                            <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td>
+                            <td style='text-align:center;vertical-align:middle'></td>
+                            <td style='text-align:center;vertical-align:middle'>Aguardando resultado</td>
+                            <td style='text-align:center;vertical-align:middle'><a href='/jogos/palpitar/extras/<%= item._id %>/<%= extra._id %>/<%= _id %>'><i class="fas fa-plus"></i></a>&nbsp;</td>                   
+                        </tr>
+                            
+                    <% } %>
+                <% } %>
+            <% } else { %>
+                <% if(palpitesAdd.includes(extra._id.toString()) == true) { %>
+                    <% userPalpites.forEach(palpites => { %>
+                        <% if(palpites.extraID == extra._id) { %>
+
+                            <tr>
+                                <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                                <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td>
+                                <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td>
+                                <td style='text-align:center;vertical-align:middle'><%= palpites.extraAnswer %></td>
+                                <td style='text-align:center;vertical-align:middle'><%= palpites.pontos %></td>
+                                <td style='text-align:center;vertical-align:middle'></td>                   
+                            </tr>
+                        
+                        <% } %>
+                    <% }); %>
+                
+                <% } else { %>
+
+                    <tr>
+                        <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                        <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td>
+                        <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td>
+                        <td style='text-align:center;vertical-align:middle'>Sem palpite</td>
+                        <td style='text-align:center;vertical-align:middle'>0</td>
+                        <td style='text-align:center;vertical-align:middle'></td>                   
+                    </tr>
+                
+                <% } %>
+            <% } %>
+        <% }); %>
+        <% }); %>
+          
+    </tbody>
+</table>
+
+
+
+ </main>
+
+<%- include('../partials/bottom_nav') %>
+<%- include('../partials/footer') %>

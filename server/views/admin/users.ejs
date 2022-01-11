@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+
+    <main class="container column-layout">
+      <h1>LISTA DE USUÁRIOS</h1>
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope="col">Nome</th>
+              <th scope="col">E-mail (username)</th>
+              <th scope="col">Apelido</th>
+              <th scope="col">Pago</th>
+              <th scope="col">Admin</th>
+              <th scope="col">Actions</th>
+              </tr>
+          </thead>
+          <tbody>              
+            <%  usersList.forEach(element => { %>  
+            <tr>
+                <th scope="row"><a href='/users/profile/<%= element._id %>'><%= element.name %></th>
+                <td><%= element.username %></td>
+                <td><%= element.apelido %></td>
+                <td><%= element.status %></td>
+                <td><%= element.administrador %></td>
+                <td><a href='/admin/edit/<%= element._id %>'><i class="far fa-edit"></i></a>&nbsp;                 
+                <a href='/admin/newpassword/<%= element._id %>/<%= element.username %>'><i class="fas fa-key"></i>&nbsp;
+                <a href='/admin/delete/<%= element._id %>'><i class="far fa-trash-alt"></i></td>                
+            </tr>
+            <% }); %>
+        
+          </tbody>
+
+      </table>
+      <a href='/admin/newuser'><button class='btn'><i class="fas fa-user-plus"></i> Novo usuário</a></main></button>
+      
+
+      <section class="text-content">        
+      </section>
+    </main>
+
+    <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

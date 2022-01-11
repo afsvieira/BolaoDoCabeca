@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<div class="box">
+    
+    
+        <br>
+            <p><h1>RANKINGS</h1></p>
+
+</div>   
+            <div class="box">
+            <h2>
+            <% boloesList.forEach(bolao => { %>
+            
+            <a href='/jogos/ranking/<%= bolao._id %>'><button class="btn btn-primary" style="margin: 0 15px;"><i class="fas fa-trophy"></i> <%= bolao.bolao %> </button></a>
+            
+            <% }); %>
+            </h2>
+            </div>   
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

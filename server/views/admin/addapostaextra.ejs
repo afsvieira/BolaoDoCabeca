@@ -1,0 +1,59 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+<main class="container column-layout">
+
+
+
+<h1>ADICIONAR PALPITES EXTRAS</h1>      
+      
+      
+<form class="form" method="POST">
+<p><div class="form-group">
+    <label for="extraAddingTextField"><b>Aposta Extra: </b></label><br />
+    <input type="text" class="form-control"
+    id="extraAddingTextField"                    
+    name="extraAdding" required>
+</div></p>
+<p><div class="form-group">
+    <label for="pointsAddingTextField"><b>Pontos para aposta extra: </b></label><br />
+    <input type="number" class="form-control"
+    id="pointsAdding"                    
+    name="pointsAdding" min='0' required>
+</div></p>
+<p><div style='text-align: center;'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+    <i class="fas fa-edit"></i> Adicionar</button>
+
+</form>
+<hr>
+<h1>PALPITES EXTRAS CADASTRADOS</h1>      
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope="col">Data Limite</th>
+              <th scope='col'>Extra</th>
+              <th scope="col">Pontos</th>
+              </tr>
+          </thead>
+
+          <tbody>
+              
+                <% bolao.forEach(item => { %>
+                    <% var dataLimite = new Date(item.extrasDate); %>                   
+                 
+                <% item.extras.forEach(extra => { %>
+                    <tr>
+                    <td style='text-align:center;vertical-align:middle'><%= dataLimite.toDateString() %></td>
+                    <td style='text-align:center;vertical-align:middle'><%= extra.extra %></td>
+                    <td style='text-align:center;vertical-align:middle'><%= extra.points %></td>                    
+                    </tr>                    
+                  <% }); %>
+                <% }); %>
+            </tbody>
+        </table>
+
+</main>
+
+<%- include('../partials/bottom_nav') %>
+<%- include('../partials/footer') %>

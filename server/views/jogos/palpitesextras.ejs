@@ -1,0 +1,81 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+<main class="container column-layout">
+<% let extras = []; %>
+<% let extrasAnswers = []; %>
+
+
+<h1>PALPITES EXTRAS - <b><%= bolao.bolao %></b></h1>      
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope='col'>Nome</th>
+              <th scope="col">Apelido</th>
+              <% bolao.extras.forEach(extra => { %>
+                <th scope="col"><%= extra.extra %></th>
+                <% extras.push(extra._id); %>
+                <% if(extra.resultado != null) { %> 
+                    <% extrasAnswers.push(extra.resultado); %>
+                <% } %>                 
+              <% }); %>                           
+              <th scope="col">Pontos Ganhos</th>
+              </tr>
+          </thead>
+
+          <tbody>
+              <% var dataLimite = new Date(bolao.extrasDate); dataLimite.setHours(1,0,0,0) %>
+              <% var today = new Date(); today.setHours(1,0,0,0) %>
+              <% if(today > dataLimite) { %>
+                <% userList.forEach(user => { %>
+                    <tr>
+                        <td style='text-align:center;vertical-align:middle'><%= user.name %></td>
+                        <td style='text-align:center;vertical-align:middle'><%= user.apelido %></td>                        
+                            
+                            <% extras.forEach(extraQuestion => { %>
+                                <% var AnswerExist = false; %>
+                                <% palpitesList.forEach(palpite => { %>        
+                            
+                                    <% if(extraQuestion == palpite.extraID && user._id == palpite.userID) { %>
+                                        <td style='text-align:center;vertical-align:middle'><%= palpite.extraAnswer %></td>
+                                        <% AnswerExist = true; %>                                
+                                    <% } %>
+                                <% }); %>
+                                <% if(AnswerExist == false) { %>
+                                    <td style='text-align:center;vertical-align:middle'><font color="red">Sem Palpite</font></td>
+                                <% } %> 
+                            <% }); %>
+
+                        <td style='text-align:center;vertical-align:middle'>
+                            <% if(extrasAnswers.length == 0) { %> 
+                                Aguardando resultado
+                            <% } else { %> 
+                                <% let sumPontos = 0 %>
+                                <% pontos.forEach(ponto => { %>
+                                    <% extras.forEach(extraID => { %> 
+                                        <% if(ponto.user == user._id && ponto.jogo == extraID) { %>
+                                        <% sumPontos += ponto.pontos %>                                                                        
+                                        <% } %>
+                                    <% }); %>                                
+                                <% }); %>
+                                <%= sumPontos %>
+                            <% } %>
+                        </td>
+                    </tr>
+                    
+                <% }); %>
+
+
+              <% } %>
+                
+            
+
+          </tbody>
+                 
+            
+                </table>
+</main>
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

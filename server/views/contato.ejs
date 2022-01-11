@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+<%- include('partials/nav_bar') %>
+
+<main class="container">
+    <div id="page-title">
+        <h1><%= title %></h1>
+        <p>Felipe Vieira</p>
+        <p><i class="fab fa-whatsapp"></i> +1 (647) 916-7763</p>
+        <p><i class="fas fa-envelope"></i> contato@bolaodocabeca.com</p>
+        <p>
+          Entre em contato para maiores informações sobre como participar, regras e problemas no site.
+        </p>
+    </div>
+
+    <!-- Section for the contact form -->
+    
+        <form action="/contact" method="POST" class="row g-3">
+        <div class=col-md-6">
+          <label for="name" class="form-label">Nome:</label><br />
+          <input type="text" id="name" class="form-control" name="name" title='Nome' required/><br />      
+        </div>
+        <div class="col-md-6">       
+          <label for="contactNumber" class="form-label">Telefone:</label><br />          
+          <input type="tel" id="contactNumber" class="form-control" name="contactNumber" title='Telefone' /><br />
+        </div>
+        <div class="col-md-6"> 
+          <label for="email" class="form-label">E-mail address:</label><br />
+          <input type="text" id="email" class="form-control" name="email" title='E-mail' /><br />
+          </div>
+          <div class="form-floating">          
+          <textarea type="text" id="message" class="form-control" name="message" title='Menssagem' style="height: 100px"></textarea><br />
+          <label for="floatingTextArea" class="form-label">Menssagem</label><br />
+          <input id="submit-button" type="submit" class="btn btn-success" value="Enviar" />
+        </form>
+   
+    
+</main>
+    
+<%- include('partials/bottom_nav') %>
+<%- include('partials/footer') %>

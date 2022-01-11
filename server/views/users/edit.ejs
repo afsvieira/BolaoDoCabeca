@@ -1,0 +1,71 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+        <br>
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <p><div class="form-group">
+                    <label for="nameTextField"><b>Nome:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="nameTextField"
+                    placeholder="Nome"
+                    name="name" value='<%= userToEdit.name %>' required>
+                </div></p>
+                <p>
+                <div class="form-group">
+                    <label for="apelidoTextField"><b>Apelido:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="apelidoTextField" placeholder='Apelido'                    
+                    name="apelido" value='<%= userToEdit.apelido %>' required>
+                </div>
+                </p>
+                
+                <p><div class="form-group">
+                    <label for="publishedTextField"><b>E-mail (username):</b></label><br />
+                    <input type="text" class="form-control"
+                    id="usernameTextField"
+                    placeholder="email@email.com"
+                    name="username" value='<%= userToEdit.username %>' required>                    
+                </div></p>
+                <div class="form-group">
+                    <label for="timeTextField"><b>Time do coração:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="timeTextField" placeholder='Time'                    
+                    name="time" value='<%= userToEdit.time %>'>
+                </div></p>
+                <div class="form-group">
+                    <label for="imgTextField"><b>URL para foto:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="urlTextField" placeholder='URL para foto'                    
+                    name="img" value='<%= userToEdit.img %>'>
+                </div></p>
+                <div class="form-group>
+                <label for="floatingTextArea" class="form-label"><b>Digite algo sobre você...</b></label><br />
+                <% if(!userToEdit.bio) { %>
+                <textarea type="text" id="bio" class="form-control" name="bio" title='Digite algo sobre você...' style="height: 100px" maxlength='300'></textarea><br />
+                <% } else { %>         
+                <textarea type="text" id="bio" class="form-control" name="bio" style="height: 100px" maxlength='300'><%= userToEdit.bio %></textarea><br />
+                <% } %>
+                
+                </div>                
+                        
+
+
+                <p><div style='text-align: center;'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="far fa-save"></i> Salvar</button>
+                
+                    <a href="/users/profile/<%= _id %>" class="btn btn-warning" style="margin: 0 15px;">
+                        <i class="fas fa-undo"></i> Cancelar</a></div></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

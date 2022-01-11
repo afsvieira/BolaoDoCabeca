@@ -1,0 +1,61 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+ <main class="container column-layout">
+      <h1>JOGOS</h1>
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope='col'>Data</th>
+              <th scope="col">Bolão</th>
+              <th scope="col">Time Mandante</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">x</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">Time Visitante </th>
+              <th scope="col">Editar</th>
+              </tr>
+          </thead>
+          <tbody>              
+              
+            <% bolao.forEach(item => { %>
+            <% item.jogos.forEach(jogo => { %>             
+              <% var dataJogo = new Date(jogo.date); %>
+              <!-- Jogo a editar -->           
+              <tr>                
+                <form class="form" method="POST">                               
+                <td style='text-align:center;vertical-align:middle'><%= dataJogo.toDateString() %></td>
+                <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td> 
+                <td style='text-align:center;vertical-align:middle'><%= jogo.time1 %></td>
+                <td style='text-align:center;vertical-align:middle'> <% item.times.forEach(img => { %> <% if(jogo.time1 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td style='text-align:center;vertical-align:middle'><%= jogo.resultado_time1 %></td>
+                <td style='text-align:center;vertical-align:middle'>x</td>
+                <td style='text-align:center;vertical-align:middle'><%= jogo.resultado_time2 %></td>
+                <td style='text-align:center;vertical-align:middle'><% item.times.forEach(img => { %> <% if(jogo.time2 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td style='text-align:center;vertical-align:middle'> <%= jogo.time2 %></td>                
+                <td style='text-align:center;vertical-align:middle'><a href='/admin/jogo/editdate/<%= item._id %>/<%= jogo._id %>' title='Editar Data'><i class="fas fa-calendar"></i>&nbsp;</a>
+                  <a href='/admin/jogo/addresultado/<%= item._id %>/<%= jogo._id %>' title='Editar resultado'><i class="fas fa-edit"></i>&nbsp;</a>
+                  <a href='/admin/jogo/removeresult/<%= item._id %>/<%= jogo._id %>' title='Remover resultado'><i class="fas fa-eraser"></i>&nbsp;</a>
+                  <a href='/admin/jogo/delete/<%= item._id %>/<%= jogo._id %>' title='Deletar jogo'><i class="fas fa-trash-alt"></i></a></td>                
+            </tr>
+            <% }); %>
+            <% }); %>
+
+
+          </tbody>
+      </table>     
+    </main>
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+        <br>
+            
+
+            
+                <p><div style='text-align: center;'>
+                    <label for="bolaoTextField"><b>Selecione o Bolão que deseja adicionar novo jogo: </b></label><br />
+                </p></div>
+                
+                <% boloesList.forEach(element => { %>
+                <p><div style='text-align: center;'>
+                <button class="btn btn-primary" style="margin: 0 15px;"><a href="/admin/addjogo/<%= element._id%>"><i class="far fa-plus-square"></i>
+                <%= element.bolao %></a>
+                </div></p>  <% }); %>                
+                             
+                <p><div style='text-align: center;'>
+                    <a href="/admin" class="btn btn-warning" style="margin: 0 15px;">
+                        <i class="fas fa-undo"></i> Cancelar</a></div></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

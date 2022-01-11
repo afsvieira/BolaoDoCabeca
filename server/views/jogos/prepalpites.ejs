@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<main class="container column-layout">
+    <form method='POST'> 
+    <div><p><b>Selecione o bolão: </b><select type="selected" class="form-control"
+                    id="bolao" onchange="this.form.submit()"                    
+                    name="bolaoID" required>
+                    <option value='null'> </option>
+                    <% boloesList.forEach(element => { %>
+                    <% if(element.bolao != null) { %>
+                    <option value='<%= element._id %>'><%= element.bolao %></option>
+                    <% } %>
+                     <% }); %></select>
+                </div></p> </form>
+       
+ </main>                                     
+
+
+ <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

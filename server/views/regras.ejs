@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+<%- include('partials/nav_bar') %>
+
+<main class="container">
+    <div id="page-title">
+        <h1><%= title %></h1>
+        <p>Clique no Bolão desejado para saber as suas regras.</p>
+        <p><% boloesList.forEach(element => { %>
+            <p><div style='text-align: center;'>
+            <button class="btn btn-primary" style="margin: 0 15px;"><a href="/regras/<%= element._id%>"><i class="far fa-plus-square"></i>
+            <%= element.bolao %></a>
+            </div></p>  <% }); %>      
+        
+    </div>
+
+    <!-- Section for the contact form -->
+    
+        <div class="row g-3" text="left">           
+            <% if(bolao == null) { %>             
+            <% } else { %>
+                <% if(bolao.bolao == "Champions League") { %>
+                    <h2><%= bolao.bolao %></h2>
+                    <p>Taxa de registro: <b>R$50,00</b> (R$45,00 para arrecadação + R$5,00 taxa de administração.)</p>
+                    
+                    <p>Prêmiação:<br /> <b>1º Lugar - 70% do arrecado</b><br />
+                                  <b>2º Lugar - 20% do arrecado</b><br />
+                                  <b>3º Lugar - 10% do arrecado</b></p>
+                    <p><b>PONTUAÇÃO:</b></p>
+                    <p><u>Por jogos:</u></p>
+                    <p><b>Oitavas-de-finais</b> <br />Acerto do placar    - 10 pontos<br />
+                                          Acerto do resultado - 7 pontos </p>
+                    <p><b>Quartas-de-finais</b> <br />Acerto do placar    - 15 pontos<br />
+                                          Acerto do resultado - 10 pontos </p>
+                    <p><b>Semide-finais</b>     <br />Acerto do placar    - 20 pontos<br />
+                                          Acerto do resultado - 12 pontos </p>
+                    <p><b>Final</b>             <br />Acerto do placar    - 25 pontos<br />
+                                          Acerto do resultado - 15 pontos </p>
+                    <p><u>Apostas Extras</u><br />
+                    <b>Acertar o campeão:</b>      30 pontos<br />
+                    <b>Acertar o vice-campeão:</b> 20 pontos</p>                   
+                
+                <% } %> 
+            <% } %>           
+            
+        </div>
+   
+    
+</main>
+    
+<%- include('partials/bottom_nav') %>
+<%- include('partials/footer') %>

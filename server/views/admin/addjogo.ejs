@@ -1,0 +1,74 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+        <br>
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <input type='hidden' value='<%= bolaoSelected._id %>' name='bolaoName'>
+                <p><div class="form-group">
+                    <label for="time1TextField"><b>Time 01:</b></label><br />
+                    <select type="selected" class="form-control"
+                    id="bolaoTextField"
+                    placeholder="Tiome mandante"
+                    name="time1" required>
+                    <option value='null'> </option>
+                    <% bolaoSelected.times.forEach(element => { %>
+                    <% if(element.name != null) { %>
+                    <option value='<%= element.name %>'><%= element.name %></option>
+                    <% } %>
+                     <% }); %></select>
+                </div></p>
+                
+                <p><div class="form-group">
+                    <label for="time2TextField"><b>Time 02:</b></label><br />
+                    <select type="selected" class="form-control"
+                    id="time2TextField"
+                    placeholder="Time visitante"
+                    name="time2" required>
+                    <option value='null'> </option>
+                    <% bolaoSelected.times.forEach(element => { %>
+                    <% if(element.name != null) { %>
+                    <option value='<%= element.name %>'><%= element.name %></option>
+                    <% } %>
+                     <% }); %></select>
+                </div></p>               
+                <p><div class="form-group">
+                    <label for="dateTextField"><b>Data do jogo:</b></label><br />
+                    <input type="date" class="form-control"
+                    id="dateTextField"
+                    name="date" required>
+                </div></p>
+                <p><div class="form-group">
+                    <label for="pointsMatch"><b>Pontos pelo resultado exato:</b></label><br />
+                    <input type="number" class="form-control"
+                    id="pointsMatch"                    
+                    name="pointsMatch" min='0' required>
+                </div></p>
+                <p><div class="form-group">
+                    <label for="pointsWin"><b>Pontos pelo acerto do vencedor:</b></label><br />
+                    <input type="number" class="form-control"
+                    id="pointsWin"                    
+                    name="pointsWin" min='0' required>
+                </div></p>
+                
+                
+
+
+                <p><div style='text-align: center;'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="fas fa-edit"></i> Adicionar</button>
+                
+                    <a href="/admin/preaddjogo" class="btn btn-warning" style="margin: 0 15px;">
+                        <i class="fas fa-undo"></i> Cancelar</a></div></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

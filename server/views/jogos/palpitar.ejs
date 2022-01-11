@@ -1,0 +1,190 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<% var palpitesAdd = []; %>
+ <% userPalpites.forEach(palpite => { %>   
+   <% palpitesAdd.push(palpite.jogoID); %>   
+ <% }); %>
+ 
+ 
+ 
+ <main class="container column-layout">
+      <h1 align='center'>PALPITES ABERTOS</h1> 
+      <a href='/jogos/palpitar/extras'><button class='btn'><i class="fas fa-comment-dots"></i> PALPITES EXTRAS</button></a>     
+      
+      <br />
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr>   
+              <th scope='col'>Data do Jogo</th>
+              <th scope="col">Bolão</th>
+              <th scope="col">Time Mandante</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">x</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">Time Visitante </th>
+              <th scope="col">Editar</th>
+              </tr>
+          </thead>
+          <tbody>              
+             
+              <% boloesList.forEach(item => { %>
+                <% item.jogos.forEach(jogo => { %>
+                  <% var dataJogo = new Date(jogo.date); dataJogo.setHours(1,0,0,0) %>
+                  <% var today = new Date(); today.setHours(1,0,0,0) %>                                   
+                  <% if(today < dataJogo) { %>                                      
+                    <% if(palpitesAdd.includes(jogo._id.toString()) == true) { %>                   
+                    <% userPalpites.forEach(palpites => { %>
+                    <% if(palpites.jogoID == jogo._id) { %>           
+                      <tr>
+                        <td style='text-align:center;vertical-align:middle'><%= dataJogo.toDateString() %></td>
+                        <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td> 
+                        <td style='text-align:center;vertical-align:middle'><%= jogo.time1 %></td>
+                        <td style='text-align:center;vertical-align:middle'> <% item.times.forEach(img => { %> <% if(jogo.time1 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+                                                                                                                                                                  width:50px;
+                                                                                                                                                                  height:50px;
+                                                                                                                                                                  border: none"/><% }}); %></td>                
+                      <td style='text-align:center;vertical-align:middle'><%= palpites.resultado_time1 %></td>
+                      <td style='text-align:center;vertical-align:middle'>x</td>
+                      <td style='text-align:center;vertical-align:middle'><%= palpites.resultado_time2 %></td>
+                      <td style='text-align:center;vertical-align:middle'><% item.times.forEach(img => { %> <% if(jogo.time2 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+                                                                                                                                                              width:50px;
+                                                                                                                                                              height:50px;
+                                                                                                                                                              border: none"/><% }}); %></td>
+                      <td style='text-align:center;vertical-align:middle'> <%= jogo.time2 %></td>
+                      <td style='text-align:center;vertical-align:middle'><a href='/jogos/palpitar/editar/<%= item._id %>/<%= jogo._id %>/<%= _id %>'><i class="far fa-edit"></i></a>&nbsp;</td>
+                      </tr>
+                      <% }}); %>                
+
+                    <% } else { %>
+                      <td style='text-align:center;vertical-align:middle'><%= dataJogo.toDateString() %></td>
+                      <td style='text-align:center;vertical-align:middle'><%= item.bolao %></td> 
+                      <td style='text-align:center;vertical-align:middle'><%= jogo.time1 %></td>
+                      <td style='text-align:center;vertical-align:middle'> <% item.times.forEach(img => { %> <% if(jogo.time1 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+                  width:50px;
+                  height:50px;
+                  border: none"/><% }}); %></td>
+                      <td style='text-align:center;vertical-align:middle'></td>
+                      <td style='text-align:center;vertical-align:middle'>x</td>
+                      <td style='text-align:center;vertical-align:middle'></td>                
+                      <td style='text-align:center;vertical-align:middle'><% item.times.forEach(img => { %> <% if(jogo.time2 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+                  width:50px;
+                  height:50px;
+                  border: none"/><% }}); %></td>
+                      <td style='text-align:center;vertical-align:middle'> <%= jogo.time2 %></td>
+                      <td style='text-align:center;vertical-align:middle'><a href='/jogos/palpitar/<%= item._id %>/<%= jogo._id %>/<%= _id %>'><i class="fas fa-plus"></i></a>&nbsp;</td>                      
+                      </tr>
+                      <% }}}); %>
+                <% }); %>              
+            
+            
+           
+        
+          </tbody>
+          
+
+      </table>
+      <hr>
+
+     
+      <h1 align='center'>PALPITES ENCERRADOS</h1>
+      
+      
+      <table id='table' class="table table-hover">
+          <thead>
+              <tr> 
+              <th scope='col'>Data</th>  
+              <th scope="col">Bolão</th>
+              <th scope="col">Time Mandante</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">x</th>
+              <th scope="col"> </th>
+              <th scope="col"> </th>
+              <th scope="col">Time Visitante </th>
+              <th scope='col'>Palpite</th>
+              <th scope="col">Pontos</th>
+              </tr>
+          </thead>
+          <tbody>              
+            <% boloesList.forEach(item => { %>
+              <% item.jogos.forEach(jogo => { %>
+              
+                <% var dataJogo = new Date(jogo.date); dataJogo.setHours(1,0,0,0) %>
+                <% var today = new Date(); today.setHours(1,0,0,0) %>                 
+              <% if(dataJogo <= today) { %>
+              <% if(palpitesAdd.includes(jogo._id.toString()) == true) { %>                   
+                    <% userPalpites.forEach(palpites => { %>
+                    <% if(palpites.jogoID == jogo._id) { %>           
+                      <tr>
+                        <td><%= dataJogo.toDateString() %></td>
+                        <td><%= item.bolao %></td> 
+                        <td><%= jogo.time1 %></td>
+                        <td> <% item.times.forEach(img => { %> <% if(jogo.time1 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+                                                                                                                                                                  width:50px;
+                                                                                                                                                                  height:50px;
+                                                                                                                                                                  border: none"/>
+                      <% }}); %></td>                
+                      <td><%= jogo.resultado_time1 %></td>
+                      <td>x</td>
+                      <td><%= jogo.resultado_time2 %></td>
+                      <td><% item.times.forEach(img => { %> <% if(jogo.time2 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+                                                                                                                                                              width:50px;
+                                                                                                                                                              height:50px;
+                                                                                                                                                              border: none"/>
+                      <% }}); %></td>
+                      <td> <%= jogo.time2 %></td>
+                      <td><%= palpites.resultado_time1 %> x <%= palpites.resultado_time2 %></td>                        
+                      <% let updated = false %>
+                      <% pontos.forEach(ponto => { %>                        
+                      <% if(ponto.jogo == jogo._id) { %>
+                      <td><%= ponto.pontos %></td>
+                      <% updated = true %>                      
+                      <% } %>
+                      <% }); %>
+                      <% if(updated == false) {%>
+                      <td>Aguardando atualização</td>
+                      <% } %>                  
+                      </tr>                     
+                      <% }}); %>
+                    
+              <% } else { %>
+
+              <tr>
+              <td><%= dataJogo.toDateString() %></td>
+                <td><%= item.bolao %></td> 
+                <td><%= jogo.time1 %></td>
+                <td> <% item.times.forEach(img => { %> <% if(jogo.time1 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td><%= jogo.resultado_time1 %></td>
+                <td>x</td>
+                <td><%= jogo.resultado_time2 %></td>
+                <td><% item.times.forEach(img => { %> <% if(jogo.time2 == img.name) { %> <img src="<%= img.img %>" class="rounded-circle" alt="" style="object-fit:cover;
+            width:50px;
+            height:50px;
+            border: none"/><% }}); %></td>
+                <td><%= jogo.time2 %></td>
+                <td>Sem palpite</td>                 
+                <td>0</td>                
+            </tr>
+            <% } %>
+            <% }});}); %>
+           
+        
+          </tbody>
+
+      </table>
+      
+      
+
+      <section class="text-content">        
+      </section>
+    </main>
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>

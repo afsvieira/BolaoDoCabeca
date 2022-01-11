@@ -1,0 +1,77 @@
+<%- include('../partials/header') %>
+<%- include('../partials/nav_bar') %>
+
+<!-- Message Area -->
+    <% if(messages.length > 0) {%>
+        <div class="alert alert-danger">
+            <%= messages %>
+        </div>
+    <% } %>
+<div class="container">
+    <div class="row">
+        <div class="offset-md-3 col-md-6">
+        <br>
+            <h1><%= title %></h1>
+
+            <form class="form" method="POST">
+                <p><div class="form-group">
+                    <label for="nameTextField"><b>Nome:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="nameTextField"
+                    placeholder="Nome"
+                    name="name" required>
+                </div></p>
+                <p>
+                <div class="form-group">
+                    <label for="apelidoTextField"><b>Apelido:</b></label><br />
+                    <input type="text" class="form-control"
+                    id="apelidoTextField" placeholder='Apelido'                    
+                    name="apelido" required>
+                </div>
+                </p>
+
+                <p><div class="form-group">
+                    <label for="usernameTextField"><b>E-mail</b></label><br />
+                    <input type="text" class="form-control"
+                    id="usernameTextField"
+                    placeholder="email@email.com"
+                    name="username" required>
+                </div></p>
+                <p><div class="form-group">
+                    <label for="passwordTextField"><b>Senha:</b></label><br />
+                    <input type="password" class="form-control"
+                    id="password"
+                    placeholder="Escolha uma senha"
+                    name="password" required>
+                </div></p>
+                <p><div class='form-group'>
+                <label for='status'><b>Pagamento:</b></label><br />
+                <input type='radio' id='sim' value='Sim' name='status'>
+                <label for='sim'>Sim</label><br>
+                <input type='radio' id='nao' value='Não' name='status'>
+                <label for='Sim'>Não</label><br></p> 
+
+                <p><div class='form-group'>
+                <label for='admin'><b>Administrador:</b></label><br />
+                <input type='radio' id='sim' value='Sim' name='admin'>
+                <label for='sim'>Sim</label><br>
+                <input type='radio' id='nao' value='Não' name='admin'>
+                <label for='Nao'>Não</label><br></p>   
+                
+
+
+                <p><div style='text-align: center;'><button class="btn btn-primary" type="submit" style="margin: 0 15px;" >
+                    <i class="fas fa-edit"></i> Adicionar</button>
+                
+                    <a href="/admin" class="btn btn-warning" style="margin: 0 15px;">
+                        <i class="fas fa-undo"></i> Cancelar</a></div></p>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+  <%- include('../partials/bottom_nav') %>
+  <%- include('../partials/footer') %>
